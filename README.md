@@ -1,6 +1,6 @@
 # xishuipang_android
 
-the android app for [xishuipang website](xishuipang.com)
+the android app for [xishuipang website](http://www.xishuipang.com/)
 
 ## Intro
 
