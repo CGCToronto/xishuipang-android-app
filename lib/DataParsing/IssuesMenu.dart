@@ -8,4 +8,6 @@ class Issue{
   Issue(this.volume, this.title, this.theme, this.issueId, this.character);
 
 
+
+
 }
