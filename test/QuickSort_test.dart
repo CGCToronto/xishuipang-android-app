@@ -6,7 +6,7 @@ void main() {
 
   test('Quick Sort Algorithmn testify', () {
     var value=quickSort(list);
-    expect(value, [1,2,5,6,8,9]);
+    expect(value, [9,8,6,5,2,1]);
   });
 
 

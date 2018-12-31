@@ -11,9 +11,9 @@
     // Partition
     a.forEach((var i){
       if (i.compareTo(pivot) < 0) {
-        less.add(i);
-      } else if (i.compareTo(pivot) > 0) {
         more.add(i);
+      } else if (i.compareTo(pivot) > 0) {
+        less.add(i);
       } else {
         pivotList.add(i);
       }
