@@ -18,10 +18,10 @@ Future<Post> fetchPost() async {
 }
 
 class Post {
-  final int userId;
-  final int id;
-  final String title;
-  final String body;
+  int userId;
+  int id;
+  String title;
+  String body;
 
   Post({this.userId, this.id, this.title, this.body});
 
@@ -33,6 +33,7 @@ class Post {
       body: json['body'],
     );
   }
+
 }
 
 void main() => runApp(MyApp(post: fetchPost()));

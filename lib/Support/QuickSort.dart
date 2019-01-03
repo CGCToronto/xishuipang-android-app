@@ -1,12 +1,12 @@
-  quickSort(List a) {
+quickSort(List a) {
     if (a.length <= 1) {
       return a;
     }
 
-    var pivot = a[0];
-    var less = [];
-    var more = [];
-    var pivotList = [];
+    int pivot = a[0];
+    List<int> less = [];
+    List<int> more = [];
+    List<int> pivotList = [];
 
     // Partition
     a.forEach((var i){
