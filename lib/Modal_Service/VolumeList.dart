@@ -12,11 +12,8 @@ class IssueVolumeList{
       throw FormatException("Null JSON provided to VolumeList");
     }
     else{
-      List<int> test1=new List();
-      for(int i=0;i<json.length;i++)
-      {
-        test1.add(int.parse(json[i]));
-      }
+    //convert dynamic type into int type
+      List<int> test1=json.map((i)=>int.parse(i)).toList();
       return quickSort(test1) ;
     }
   }
