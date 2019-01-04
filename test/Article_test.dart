@@ -2,7 +2,6 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:xishuipang_android/Modal_Service/Article.dart';
 import "dart:async";
 
-import 'package:xishuipang_android/Modal_Service/Article.dart';
 
 void main() {
   test('article parse', () async{
