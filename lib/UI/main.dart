@@ -1,38 +1,29 @@
 import 'package:flutter/material.dart';
+import 'ArticleUI.dart';
+//import 'package:flutter/rendering.dart' show debugPaintSizeEnabled;
 
-void main( ){
-  runApp(
-    MaterialApp(
-      debugShowCheckedModeBanner: false,
-      home: Scaffold(
-        appBar: AppBar(
-          title: Text('Hello'),
-        ),
-        body: hello()
-      ),
-    ),
-  );
+void main() {
+  //debugPaintSizeEnabled = false;
+  runApp(MyApp());
 }
 
-
-class hello extends StatelessWidget{
+class MyApp extends StatelessWidget {
   @override
-  //constructor function that widget could be changed during app running
   Widget build(BuildContext context) {
-    return Center(
-      child: Container(
-        color: Colors.greenAccent,
-        height: 400.0,
-        width: 300.0,
-        child: Center(
-          child: Text('Hello',
-            style: TextStyle(fontSize:40.0),),
-        ),
+    return new MaterialApp(
+      debugShowCheckedModeBanner: false,
+      title: '溪水旁',
+      theme: new ThemeData(
+        primaryColor: Colors.lightBlue[800],
       ),
+      home: new MyHomePage(),
     );
   }
-
 }
 
+class MyHomePage extends StatefulWidget {
+  @override
+  Article createState() => new Article();
+}
 
 
