@@ -6,17 +6,17 @@ import 'package:http/http.dart' as http;
 
 class Article{
 
-  final String volume_number;
-  final String article_id;
-  final String character;
+  String volume_number;
+  String article_id;
+  String character;
 
-  final String author;
-  final String category;
-  final String title;
-  final List<String> article_content;
+  String author;
+  String category;
+  String title;
+  List<String> article_content;
 
   Article({this.volume_number, this.article_id, this.character, this.author,
-      this.category, this.title, this.article_content, });
+  this.category, this.title, this.article_content,} );
 
   factory Article.fromJson(Map<String, dynamic> parsedJson,String volume_number){
 
@@ -24,7 +24,7 @@ class Article{
     List<String> temp_article_content=article_content_from_Json.cast<String>();
 
 
-    //use regex to find string in list with jpeg file and change it into https format
+    //use regex to find string in list with jpeg file and change it into https format, and add "\n" into list
     RegExp exp=new RegExp("[<].*[.jpeg>]");
     for(var i=0;i<temp_article_content.length;i++){
       if(exp.hasMatch(temp_article_content[i]))
@@ -32,6 +32,11 @@ class Article{
           String reshapeString=temp_article_content[i].substring(1,temp_article_content[i].length-1);
           temp_article_content[i]="http://www.xishuipang.com/content/volume_"+volume_number+"/images/"+reshapeString;
         }
+      if(temp_article_content[i]=="")
+        {
+          temp_article_content[i]="\n";
+        }
+
     }
     return new Article(
       volume_number: parsedJson['volume'] ,
