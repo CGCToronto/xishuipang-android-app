@@ -3,6 +3,7 @@ import 'package:xishuipang_android/UI/AritcleMenu//ArticleUI.dart';
 import 'package:flutter/services.dart';
 import 'package:xishuipang_android/UI/AritcleMenu/test.dart';
 //import 'package:flutter/rendering.dart' show debugPaintSizeEnabled;
+import 'package:xishuipang_android/UI/AritcleMenu/silver_test.dart';
 
 void main() {
   //debugPaintSizeEnabled = false;
@@ -12,9 +13,9 @@ void main() {
 class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    SystemChrome.setPreferredOrientations([
-      DeviceOrientation.portraitUp,
-    ]);
+//    SystemChrome.setPreferredOrientations([
+//      DeviceOrientation.portraitUp,
+//    ]);
     return new MaterialApp(
       color: Colors.black,
       debugShowCheckedModeBanner: false,
@@ -30,9 +31,14 @@ class MyApp extends StatelessWidget {
 }
 
 class MyHomePage extends StatefulWidget {
+//  @override
+//  ArticleUI createState() {
+//    return new ArticleUI();
+//  }
+
   @override
-  ArticleUI createState() {
-    return new ArticleUI();
+  sliver_test createState() {
+    return new sliver_test();
   }
 }
 
