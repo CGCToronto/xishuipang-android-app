@@ -21,26 +21,26 @@ class ArticleUI extends State<MyHomePage> {
   @override
   Widget build(BuildContext context) {
 
-
-        as.fetchArticle("57", "9_yx_s", "simplified").then((resultArticle){
-        setState(() {
-          as=resultArticle;
-          fetchSuccess=true;
-        });
+    as.fetchArticle("57", "9_yx_s", "simplified").then((resultArticle){
+      setState(() {
+        as=resultArticle;
+        fetchSuccess=true;
       });
+    });
 
-        //article part
-        List<Widget> getTextWidgets(List<String> strings)
-        {
-          List<Widget> list = new List<Widget>();
 
-          for(var i = 0; i < strings.length; i++){
-            //add function to detect image too
-            list.add(new Text(strings[i],softWrap: true,));
-          }
-
-          return list;
-          }
+//        //article part
+//        List<Widget> getTextWidgets(List<String> strings)
+//        {
+//          List<Widget> list = new List<Widget>();
+//
+//          for(var i = 0; i < strings.length; i++){
+//            //add function to detect image too
+//            list.add(new Text(strings[i],softWrap: true,));
+//          }
+//
+//          return list;
+//          }
 
 
 
@@ -70,7 +70,6 @@ class ArticleUI extends State<MyHomePage> {
       new Scaffold(
 
       body: CustomScrollView(
-        shrinkWrap: false,
         physics: BouncingScrollPhysics(),
         slivers: <Widget>[
           SliverAppBar(
@@ -85,107 +84,94 @@ class ArticleUI extends State<MyHomePage> {
                 ),
               ),
               actions: app_bar_button),
-          SliverFillRemaining(
-            child: Column(
-              children: [
+
+
+          //border line
+          Container(
+            height: 4,
+            color: const Color(0xffbceac5a),
+          ),
 
 
 
 
-                //border line
-                Container(
-                  height: 4,
-                  color: const Color(0xffbceac5a),
+
+          //first row with two texts have space between
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Container(
+                padding: const EdgeInsets.all(15.0),
+                child:
+                Text(
+                  as.category ,
+                  style: TextStyle(
+                    color: const Color(0xffbceac5a),
+                    fontSize: 16.0,
+                    //fontStyle: ,
+                  ),
                 ),
+              ),
+              Container(
+                padding: const EdgeInsets.all(15.0),
+                child: Text(
+                  '第'+as.volume_number+'期',
+                  style: TextStyle(
+                    color: const Color(0xffbadacaa),
+                    fontSize: 10.0,
+                    //fontStyle: ,
+                  ),
+                ),
+              )
+            ],
+          ),
 
+          // Article title
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Expanded(
+                child: Column(children: [
+                  Container(
+                    padding: const EdgeInsets.fromLTRB(15, 0, 80, 10),
+                    child: Text(
+                      as.title,
 
-
-
-
-                //first row with two texts have space between
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Container(
-                      padding: const EdgeInsets.all(15.0),
-                      child:
-                      Text(
-                       as.category ,
-                        style: TextStyle(
-                          color: const Color(0xffbceac5a),
-                          fontSize: 16.0,
-                          //fontStyle: ,
-                        ),
+                      style: TextStyle(
+                        color: const Color(0xffb4c4b4a),
+                        fontSize: 25.0,
+                        fontWeight: FontWeight.bold,
+                        //fontStyle: ,
                       ),
                     ),
-                    Container(
-                      padding: const EdgeInsets.all(15.0),
-                      child: Text(
-                        '第'+as.volume_number+'期',
-                        style: TextStyle(
-                          color: const Color(0xffbadacaa),
-                          fontSize: 10.0,
-                          //fontStyle: ,
-                        ),
-                      ),
-                    )
-                  ],
+                  ),
+                ]),
+              ),
+            ],
+          ),
+
+
+          //author
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Container(
+                padding: const EdgeInsets.all(15.0),
+                child: Text(
+                  as.author,
+                  style: TextStyle(
+                    color: const Color(0xffbadacaa),
+                    fontSize: 16.0,
+                    fontWeight: FontWeight.bold,
+                    fontStyle: FontStyle.italic,
+                    //fontStyle: ,
+                  ),
                 ),
+              ),
 
-                // Article title
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Expanded(
-                      child: Column(children: [
-                        Container(
-                          padding: const EdgeInsets.fromLTRB(15, 0, 80, 10),
-                          child: Text(
-                            as.title,
+            ],
+          ),
 
-                            style: TextStyle(
-                              color: const Color(0xffb4c4b4a),
-                              fontSize: 25.0,
-                              fontWeight: FontWeight.bold,
-                              //fontStyle: ,
-                            ),
-                          ),
-                        ),
-                      ]),
-                    ),
-                  ],
-                ),
-
-
-                //author
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Container(
-                      padding: const EdgeInsets.all(15.0),
-                      child: Text(
-                        as.author,
-                        style: TextStyle(
-                          color: const Color(0xffbadacaa),
-                          fontSize: 16.0,
-                          fontWeight: FontWeight.bold,
-                          fontStyle: FontStyle.italic,
-                          //fontStyle: ,
-                        ),
-                      ),
-                    ),
-
-                  ],
-                ),
-
-                //Article's Content
-                SliverList(
-                  delegate: SliverChildListDelegate(getTextWidgets(as.article_content)),
-                )
-
-              ],
-            ),
-          )
         ],
       ),
     );

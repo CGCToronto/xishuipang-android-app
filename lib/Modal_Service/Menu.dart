@@ -63,11 +63,13 @@ class Category{
 }
 
 class ArticlePiece{
-  final String title;
-  final String author;
-  final String id;
+  String title;
+  String author;
+  String id;
+
 
   ArticlePiece({this.title, this.author, this.id});
+  ArticlePiece.origin(this.title, this.author, this.id);
 
   factory ArticlePiece.fromJson(Map<String, dynamic> parsedJson){
     return new ArticlePiece(
