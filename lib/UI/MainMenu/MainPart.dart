@@ -5,7 +5,7 @@ import 'dart:async';
 import 'package:http/http.dart' as http;
 
 class MainPart extends State<MyHomePage> {
-  String hah='';
+  String hah='assets/images/banner.jpg';
   Menu m=new Menu();
   List<cardmake> cm1=new List();
   bool localimage=true;
@@ -23,32 +23,6 @@ class MainPart extends State<MyHomePage> {
     }return cm;
   }
 
-  //test if there is an image file we can use on the card
- Future<String> localImageSuccess(String volume,String id) async{
-    final response1=await http.get("http://www.xishuipang.com/content/volume_${volume}/images/${id.substring(0,id.length-3)}.jpeg");
-    final response2=await http.get("http://www.xishuipang.com/content/volume_${volume}/images/${id.substring(0,id.length-2)}1.jpeg");
-
-    if(response1.statusCode==200)
-      {
-        setState(() {
-          localimage=false;
-        });
-        return "http://www.xishuipang.com/content/volume_${volume}/images/${id.substring(0,id.length-3)}.jpeg";
-      }
-      else if(response2.statusCode==200){
-      setState(() {
-        localimage=false;
-      });
-        return "http://www.xishuipang.com/content/volume_${volume}/images/${id.substring(0,id.length-2)}1.jpeg";
-    }
-    else{
-      setState(() {
-        localimage=true;
-      });
-      return 'assets/images/banner.jpg';
-    }
-
-  }
 
 
   @override
@@ -77,11 +51,7 @@ class MainPart extends State<MyHomePage> {
   }
 
   Widget buildCard(cardmake c){
-    localImageSuccess(m.volume_number, c.categoryName).then((result){
-          setState(() {
-            hah=result;
-          });
-    });
+
     return Padding(
       padding: const EdgeInsets.fromLTRB(0.0,0.5,0.0,0.5),
       child: Card(
@@ -102,9 +72,7 @@ class MainPart extends State<MyHomePage> {
                       child: Container(
                           height: 80.0,
                           width: 80.0,
-                          child: (localimage
-                              ? Image.asset(hah,fit: BoxFit.cover,)
-                              : Image.network(hah,fit: BoxFit.cover,)),
+                          child: Image.asset(hah,fit: BoxFit.cover,),
                         //Image.asset('assets/images/banner.jpg',fit: BoxFit.cover,),
                       ),
                     ),

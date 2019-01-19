@@ -1,9 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:xishuipang_android/UI/AritcleMenu//ArticleUI.dart';
-import 'package:flutter/services.dart';
-import 'package:xishuipang_android/UI/AritcleMenu/test.dart';
+import 'package:xishuipang_android/UI/AritcleMenu/ArticleUI.dart';
 //import 'package:flutter/rendering.dart' show debugPaintSizeEnabled;
-import 'package:xishuipang_android/UI/AritcleMenu/silver_test.dart';
 import 'package:xishuipang_android/UI/MainMenu/MainPart.dart';
 void main() {
   //debugPaintSizeEnabled = false;
@@ -37,8 +34,8 @@ class MyHomePage extends StatefulWidget {
   }
 
 //  @override
-//  sliver_test createState() {
-//    return new sliver_test();
+//  ArticleUI createState() {
+//    return new ArticleUI();
 //  }
 
 
