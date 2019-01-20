@@ -4,22 +4,36 @@ import 'package:flutter/material.dart';
 import 'package:xishuipang_android/Modal_Service/Article.dart';
 import 'package:share/share.dart';
 import 'package:xishuipang_android/UI/AritcleMenu//FavouriteButton.dart';
+import 'package:flutter/foundation.dart';
 
-class ArticleUI extends State<MyHomePage> {
+class ArticleUI extends StatefulWidget{
+  final String valueOfID;
+
+  ArticleUI({Key key, this.valueOfID}) : super(key: key);
+  @override
+  State<StatefulWidget> createState() {
+    return _ArticleUI();
+  }
+}
+
+class _ArticleUI extends State<ArticleUI> {
 //Demo fetch article's values
-  String image = "http://www.xishuipang.com/content/volume_57/images/9_yx.jpeg";
+  String image = "assets/images/banner.jpg";
   Article as = new Article();
   bool fetchSuccess = false;
-  List<Widget> together = List();
+
+
+
+
 
   @override
   Widget build(BuildContext context) {
     //fetch data and transfer to plain object
-    as.fetchArticle("57", "3_pw_s", "simplified").then((resultArticle) {
+    as.fetchArticle("57", widget.valueOfID, "simplified").then((resultArticle) {
       setState(() {
         as = resultArticle;
         fetchSuccess = true;
-      });
+     });
     });
 
     //appbar setting
@@ -55,9 +69,11 @@ class ArticleUI extends State<MyHomePage> {
       ),
     ];
 
-    return fetchSuccess == false
+    return
+      fetchSuccess == false
         ? const CircularProgressIndicator()
-        : new Scaffold(
+        :
+      new Scaffold(
             body: _buildScrollable(context,as, app_bar_button),
           );
   }
@@ -72,7 +88,7 @@ class ArticleUI extends State<MyHomePage> {
           floating: false,
           pinned: true,
           flexibleSpace: FlexibleSpaceBar(
-            background: Image.network(
+            background: Image.asset(
               image,
               fit: BoxFit.cover,
             ),
@@ -174,13 +190,15 @@ class ArticleUI extends State<MyHomePage> {
     RegExp exp = new RegExp("[http://www.xishuipang.com/content/].*");
     if (exp.hasMatch(paragraph)) {
 
-      return Container(padding:const EdgeInsets.fromLTRB(15,2,15,2),child:Image.network(paragraph));
+      return Container(
+          padding:const EdgeInsets.fromLTRB(15,2,15,2),
+          child:Image.network(paragraph));
     } else {
       return Container(
           padding: const EdgeInsets.fromLTRB(15, 2, 15, 2),
           child: Text(paragraph,
           style: TextStyle(
-            fontSize: 16.0,
+            fontSize: 18.0,
             fontWeight: FontWeight.w500,
             fontStyle: FontStyle.normal,
           ),)

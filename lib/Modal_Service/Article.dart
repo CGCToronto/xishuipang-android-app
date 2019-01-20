@@ -15,6 +15,8 @@ class Article{
   String title;
   List<String> article_content;
 
+  Article.origin(this.volume_number, this.article_id, this.character, this.author,
+      this.category, this.title, this.article_content,);
   Article({this.volume_number, this.article_id, this.character, this.author,
   this.category, this.title, this.article_content,} );
 
