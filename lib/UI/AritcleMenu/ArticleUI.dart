@@ -83,7 +83,7 @@ class _ArticleUI extends State<ArticleUI> {
       physics: BouncingScrollPhysics(),
       slivers: <Widget>[
         SliverAppBar(
-          backgroundColor: Colors.black,
+          backgroundColor: Colors.white,
           expandedHeight: 220,
           floating: false,
           pinned: true,
@@ -136,8 +136,9 @@ class _ArticleUI extends State<ArticleUI> {
                         child: Text(
                           as.title,
                           style: TextStyle(
+                            fontFamily: 'font1-data4-23',
                             color: const Color(0xffb4c4b4a),
-                            fontSize: 25.0,
+                            fontSize: 22.0,
                             fontWeight: FontWeight.bold,
                             //fontStyle: ,
                           ),
@@ -154,12 +155,12 @@ class _ArticleUI extends State<ArticleUI> {
                   Container(
                     padding: const EdgeInsets.all(15.0),
                     child: Text(
-                      as.author,
+                      '文/'+as.author,
                       style: TextStyle(
                         color: const Color(0xffbadacaa),
                         fontSize: 16.0,
                         fontWeight: FontWeight.bold,
-                        fontStyle: FontStyle.italic,
+
                         //fontStyle: ,
                       ),
                     ),
@@ -191,16 +192,19 @@ class _ArticleUI extends State<ArticleUI> {
     if (exp.hasMatch(paragraph)) {
 
       return Container(
-          padding:const EdgeInsets.fromLTRB(15,2,15,2),
+          padding:const EdgeInsets.fromLTRB(15,2,40,2),
           child:Image.network(paragraph));
     } else {
       return Container(
-          padding: const EdgeInsets.fromLTRB(15, 2, 15, 2),
+          padding: const EdgeInsets.fromLTRB(15, 2, 40, 2),
           child: Text(paragraph,
           style: TextStyle(
-            fontSize: 18.0,
-            fontWeight: FontWeight.w500,
-            fontStyle: FontStyle.normal,
+            fontFamily: 'pfsc',
+            fontSize: 16.0,
+              letterSpacing:3.0,
+              wordSpacing: 6.0,
+
+              height:1.5,
           ),)
       );
     }

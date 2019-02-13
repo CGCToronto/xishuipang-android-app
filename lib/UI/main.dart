@@ -5,6 +5,7 @@ import 'package:xishuipang_android/UI/MainMenu/MainPart.dart';
 void main() {
   //debugPaintSizeEnabled = false;
   runApp(MyApp());
+
 }
 
 class MyApp extends StatelessWidget {
@@ -14,11 +15,11 @@ class MyApp extends StatelessWidget {
 //      DeviceOrientation.portraitUp,
 //    ]);
     return new MaterialApp(
-      color: Colors.black,
+      color: Colors.white,
       debugShowCheckedModeBanner: false,
       title: '溪水旁',
       theme: new ThemeData(
-        primaryColor: Colors.black,
+        primaryColor: Colors.white,
       ),
         home: new MyHomePage()
 

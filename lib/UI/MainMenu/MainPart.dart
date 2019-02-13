@@ -45,10 +45,18 @@ class MainPart extends State<MyHomePage> {
       appBar: new AppBar(
         title: new Text("溪水旁"),
       ),
-      body:new ListView(
+//      body:new ListView(
+//        physics: BouncingScrollPhysics(),
+//            children: cm1.map(buildCard).toList(),
+//        ),
+      body: ListView.builder(
         physics: BouncingScrollPhysics(),
-            children: cm1.map(buildCard).toList(),
-        ),
+        itemCount: cm1.length,
+        itemBuilder: (context, index) {
+          return buildCard(cm1[index]);
+        },
+      ),
+
 
     );
   }
