@@ -201,6 +201,7 @@ class _ArticleUI extends State<ArticleUI> {
           style: TextStyle(
             fontFamily: 'pfsc',
             fontSize: 16.0,
+              fontWeight: FontWeight.w600,
               letterSpacing:3.0,
               wordSpacing: 6.0,
 
