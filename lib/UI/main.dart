@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:xishuipang_android/UI/AritcleMenu/ArticleUI.dart';
 //import 'package:flutter/rendering.dart' show debugPaintSizeEnabled;
 import 'package:xishuipang_android/UI/MainMenu/MainPart.dart';
-import 'package:xishuipang_android/UI/MainMenu/testPageSelector.dart';
 void main() {
   //debugPaintSizeEnabled = false;
   runApp(MyApp());

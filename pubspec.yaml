@@ -28,6 +28,9 @@ dev_dependencies:
     sdk: flutter
 
 
+
+
+
 # For information on the generic Dart part of this file, see the
 # following page: https://www.dartlang.org/tools/pub/pubspec
 
@@ -48,6 +51,9 @@ flutter:
   - family: font1-data4-23
     fonts:
       - asset: assets/fonts/font1-data4-23/biaosongti.ttc
+
+
+
 
   # To add assets to your application, add an assets section, like this:
   # assets:
