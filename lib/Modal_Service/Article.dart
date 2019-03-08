@@ -52,6 +52,7 @@ class Article{
     );
   }
 
+
   Future<Article> fetchArticle(String volume_number, String id, String character) async {
     final response =
     await http.get('http://www.xishuipang.com/article/get?volume='+ volume_number+'&name='+id+'&character='+character);

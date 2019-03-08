@@ -1,5 +1,5 @@
 import 'dart:async';
-import 'package:xishuipang_android/UI/main.dart';
+import 'package:xishuipang_android/UI/Main.dart';
 import 'package:flutter/material.dart';
 import 'package:xishuipang_android/Modal_Service/Article.dart';
 import 'package:share/share.dart';
