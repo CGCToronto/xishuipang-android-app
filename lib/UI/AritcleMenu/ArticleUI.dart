@@ -3,13 +3,15 @@ import 'package:xishuipang_android/UI/Main.dart';
 import 'package:flutter/material.dart';
 import 'package:xishuipang_android/Modal_Service/Article.dart';
 import 'package:share/share.dart';
-import 'package:xishuipang_android/UI/AritcleMenu//FavouriteButton.dart';
 import 'package:flutter/foundation.dart';
+import 'package:xishuipang_android/button/shareButton.dart';
+import 'package:xishuipang_android/UI/MainMenu/listItem.dart';
 
 class ArticleUI extends StatefulWidget{
   final String valueOfID;
+  final String volumenumber;
 
-  ArticleUI({Key key, this.valueOfID}) : super(key: key);
+  ArticleUI({Key key, this.valueOfID, this.volumenumber}) : super(key: key);
   @override
   State<StatefulWidget> createState() {
     return _ArticleUI();
@@ -29,7 +31,9 @@ class _ArticleUI extends State<ArticleUI> {
   @override
   Widget build(BuildContext context) {
     //fetch data and transfer to plain object
-    as.fetchArticle("57", widget.valueOfID, "simplified").then((resultArticle) {
+    as.fetchArticle(
+        widget.volumenumber.toString(), widget.valueOfID, "simplified").then((
+        resultArticle) {
       setState(() {
         as = resultArticle;
         fetchSuccess = true;
@@ -38,40 +42,14 @@ class _ArticleUI extends State<ArticleUI> {
 
     //appbar setting
     List<Widget> app_bar_button = [
-      //FavoriteWidget(), // create favourite button
-      IconButton(
-        icon: const Icon(Icons.share),
-        tooltip: '分享',
-        onPressed: () {
-          /* ... */
-          final RenderBox box = context.findRenderObject();
-          Share.share(
-              '欢迎阅读溪水旁第' +
-                  as.volume_number +
-                  '期\n'
-                  '主题:' +
-                  as.category +
-                  '\n文章：《' +
-                  as.title +
-                  '》\n作者:' +
-                  as.author +
-                  '\n'
-                  '你可以登入AppStore或者PlayStore下载手机客户端\n'
-                  '或者登入网页：\nhttp://www.xishuipang.com/article?volume=' +
-                  as.volume_number +
-                  '&articleId=' +
-                  as.article_id +
-                  '进行阅读，\n'
-                  '谢谢你的支持，\n'
-                  '以上分享来自溪水旁手机客户端',
-              sharePositionOrigin: box.localToGlobal(Offset.zero) & box.size);
-        },
-      ),
+      shareButton(as),
     ];
 
     return
       fetchSuccess == false
-        ? const CircularProgressIndicator()
+          ? Center(
+        child: CircularProgressIndicator(),
+      )
         :
       new Scaffold(
             body: _buildScrollable(context,as, app_bar_button),
@@ -83,7 +61,7 @@ class _ArticleUI extends State<ArticleUI> {
       physics: BouncingScrollPhysics(),
       slivers: <Widget>[
         SliverAppBar(
-          backgroundColor: Colors.white,
+          backgroundColor: Colors.black,
           expandedHeight: 220,
           floating: false,
           pinned: true,
@@ -199,11 +177,11 @@ class _ArticleUI extends State<ArticleUI> {
           padding: const EdgeInsets.fromLTRB(15, 2, 40, 2),
           child: Text(paragraph,
           style: TextStyle(
-            fontFamily: 'pfsc',
+            //fontFamily: 'pfsc',
             fontSize: 16.0,
               fontWeight: FontWeight.w600,
               letterSpacing:3.0,
-              wordSpacing: 6.0,
+            //wordSpacing: 6.0,
 
               height:1.5,
           ),)
