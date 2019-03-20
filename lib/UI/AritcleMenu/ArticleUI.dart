@@ -114,7 +114,7 @@ class _ArticleUI extends State<ArticleUI> {
                         child: Text(
                           as.title,
                           style: TextStyle(
-                            fontFamily: 'font1-data4-23',
+                            //fontFamily: 'font1-data4-23',
                             color: const Color(0xffb4c4b4a),
                             fontSize: 22.0,
                             fontWeight: FontWeight.bold,
@@ -179,9 +179,9 @@ class _ArticleUI extends State<ArticleUI> {
           style: TextStyle(
             //fontFamily: 'pfsc',
             fontSize: 16.0,
-              fontWeight: FontWeight.w600,
+            fontWeight: FontWeight.w600,
               letterSpacing:3.0,
-            //wordSpacing: 6.0,
+            wordSpacing: 6.0,
 
               height:1.5,
           ),)

@@ -47,14 +47,14 @@ flutter:
   uses-material-design: true
   assets:
       - assets/images/banner.jpg
-  fonts:
-  - family: pfsc
-    fonts:
-      - asset: assets/fonts/PingFang-SC-Thin/PingFang-SC-Thin.otf
-
-  - family: font1-data4-23
-    fonts:
-      - asset: assets/fonts/font1-data4-23/biaosongti.ttc
+  #  fonts:
+  #  - family: pfsc
+  #    fonts:
+  #      - asset: assets/fonts/PingFang-SC-Thin/PingFang-SC-Thin.otf
+  #
+  #  - family: font1-data4-23
+  #    fonts:
+  #      - asset: assets/fonts/font1-data4-23/biaosongti.ttc
 
 
 

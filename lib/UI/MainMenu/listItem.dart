@@ -48,7 +48,12 @@ class ListItem extends StatelessWidget {
           children: <Widget>[
             Container(
               margin: const EdgeInsets.fromLTRB(5, 5, 5, 5),
-              child: Text('-   ${item.category}   -'
+              child: Text('-   ${item.category}   -',
+                  style: TextStyle(
+                    color: const Color(0xffbceac5a),
+                    fontSize: 15.0,
+                    //fontStyle: ,
+                  )
                   //fontStyle: ,
                   ),
             ),
@@ -61,14 +66,22 @@ class ListItem extends StatelessWidget {
           children: <Widget>[
             new Row(
               children: [
-                Column(children: [
+                Expanded(
+                    child: Column(children: [
                   Container(
                     margin: const EdgeInsets.fromLTRB(5, 5, 5, 5),
                     child: Text(
                       '${item.title}',
+                      style: TextStyle(
+                        //fontFamily: 'font1-data4-23',
+                        color: const Color(0xffb4c4b4a),
+                        fontSize: 15.0,
+                        fontWeight: FontWeight.bold,
+                        //fontStyle: ,
+                      ),
                     ),
                   ),
-                ]),
+                    ])),
               ],
             ),
             new Row(
@@ -77,6 +90,13 @@ class ListItem extends StatelessWidget {
                   margin: const EdgeInsets.fromLTRB(5, 5, 5, 5),
                   child: Text(
                     '文/${item.author}',
+                      style: TextStyle(
+                        color: const Color(0xffbadacaa),
+                        fontSize: 15.0,
+                        fontWeight: FontWeight.bold,
+
+                        //fontStyle: ,
+                      )
                   ),
                 ),
               ],
@@ -108,13 +128,21 @@ class ListItem extends StatelessWidget {
             ),
             new Row(
               mainAxisAlignment: MainAxisAlignment.center,
+
               children: [
-                Container(
-                  padding: const EdgeInsets.fromLTRB(0, 5, 0, 0),
-                  child: Text(
-                    '\"${item.sentenceList[0]}...\"',
-                  ),
-                ),
+
+                Expanded(
+                  child: Column(children: [
+                    Container(
+                      padding: const EdgeInsets.fromLTRB(5, 5, 5, 5),
+                      child: Text(
+                        '\"${item.sentenceList[0]}...\"',
+
+                      ),
+                    ),
+                  ],),)
+
+
               ],
             ),
           ],
@@ -129,6 +157,11 @@ class ListItem extends StatelessWidget {
               margin: const EdgeInsets.fromLTRB(5, 5, 5, 5),
               child: Text(
                 '第${item.volume_number}期',
+                style: TextStyle(
+                  color: const Color(0xffbadacaa),
+                  fontSize: 15.0,
+                  //fontStyle: ,
+                ),
               ),
             ),
             Container(
