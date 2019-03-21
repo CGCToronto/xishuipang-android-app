@@ -11,8 +11,9 @@ import 'package:xishuipang_android/Modal_Service/Article.dart';
 import 'package:xishuipang_android/UI/MainMenu/IssueMenu.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:xishuipang_android/UI/MainMenu/VolumeListMenu.dart';
+import "package:pull_to_refresh/pull_to_refresh.dart";
 
-String volumeNumber = "溪水旁";
+
 class MainPart extends StatefulWidget {
 
   MainPart({Key key,}) : super(key: key);
@@ -23,7 +24,7 @@ class MainPart extends StatefulWidget {
 
 class _MainPart extends State<MainPart> {
   List<int> volumeList;
-
+  String volumeNumber = "溪水旁";
 
   @override
   void initState() {
@@ -36,10 +37,17 @@ class _MainPart extends State<MainPart> {
     List<int> IssueVolume1 = await (new IssueVolumeList().fetchVolumeList());
     int latestNumber = IssueVolume1[0];
     setState(() {
-      volumeNumber = latestNumber.toString();
-      volumeList = IssueVolume1;
+      this.volumeNumber = latestNumber.toString();
+      this.volumeList = IssueVolume1;
     });
   }
+
+  currentPage(String volumeNumber) {
+    return IssueMenu(ct11: ListItem.ct1(volumeNumber));
+  }
+
+
+
 
 
   //receive data and render scaffold
@@ -47,14 +55,31 @@ class _MainPart extends State<MainPart> {
   Widget build(BuildContext context) {
     return new Scaffold(
       appBar: new AppBar(
-        title: new VolumeListMenu(volumeList1: volumeList,),
+        title: VolumeListMenu(
+          volumeList1: volumeList, volumeNumber: volumeNumber,),
+        actions: <Widget>[
+
+          CupertinoButton(
+
+            onPressed: () {
+              setState(() {
+                this.volumeNumber = VolumeListMenu.volumeNumber;
+                print(this.volumeNumber);
+              });
+            },
+            child: Text("跳转", style: TextStyle(
+              color: Colors.white,
+              //fontStyle: ,
+            ),),
+          ),
+        ],
       ),
 
 
-      body: new IssueMenu(ct11: ListItem.ct1()),
+      body: this.currentPage(this.volumeNumber),
+
     );
   }
-
 
 
 }

@@ -9,7 +9,7 @@ import 'package:xishuipang_android/UI/AritcleMenu/ArticleUI.dart';
 //每个cardtile 信息模板
 class ListItem extends StatelessWidget {
   // save list inner information to single cardTile
-  static Future<List<cardTile>> ct1() async {
+  static Future<List<cardTile>> ct1(String volumeNumber) async {
     Menu m2 = await new Menu().fetchMenu(volumeNumber, 'simplified');
     List<cardTile> ct2 = [];
     for (int i = 0; i < m2.table_of_content.length; i++) {

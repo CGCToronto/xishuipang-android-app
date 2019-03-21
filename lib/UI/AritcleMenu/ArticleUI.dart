@@ -48,7 +48,8 @@ class _ArticleUI extends State<ArticleUI> {
     return
       fetchSuccess == false
           ? Center(
-        child: CircularProgressIndicator(),
+        child: CircularProgressIndicator(
+          valueColor: new AlwaysStoppedAnimation<Color>(Colors.black),),
       )
         :
       new Scaffold(

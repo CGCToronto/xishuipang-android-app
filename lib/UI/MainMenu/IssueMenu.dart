@@ -29,7 +29,9 @@ class _IssueMenu extends State<IssueMenu> {
             );
           } else {
             return Center(
-              child: CircularProgressIndicator(),
+              child: CircularProgressIndicator(
+                valueColor: new AlwaysStoppedAnimation<Color>(Colors.black),),
+          
             );
           }
         });

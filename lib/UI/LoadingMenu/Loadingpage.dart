@@ -17,7 +17,7 @@ class _LoadingState extends State<LoadingPage> {
   void initState() {
     super.initState();
     //在加载页面停顿3秒
-    new Future.delayed(Duration(seconds: 5), () async {
+    new Future.delayed(Duration(seconds: 4), () async {
       print("启动溪水旁app....");
       Navigator.of(context).pushReplacementNamed("MainMenu");
     });
@@ -38,7 +38,9 @@ class _LoadingState extends State<LoadingPage> {
       Material(
             type: MaterialType.transparency,
             child: Container(
-                child: Text("溪水旁杂志\n\n"+"是由多伦多华人福音堂的弟兄姐妹们\n\n"+"编辑而成的属灵杂志",
+                child: Text(
+                  "《溪水旁杂志》\n\n" + "是由多伦多华人福音堂的弟兄姐妹们\n\n" + "编辑而成的属灵杂志\n\n" +
+                      "耶和华你的神必与你同在",
                   style: new TextStyle(
                     color: Colors.white,
                     fontWeight: FontWeight.bold,

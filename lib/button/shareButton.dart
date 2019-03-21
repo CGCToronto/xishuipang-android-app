@@ -34,7 +34,7 @@ class shareButton extends StatelessWidget {
                 as.article_id +
                 '进行阅读，\n'
                 '溪水旁开发小组：谢谢您的支持，\n'
-                '主与你同在。',
+                    '耶和华你的神必与你同在。',
             sharePositionOrigin: box.localToGlobal(Offset.zero) & box.size);
       },
     );

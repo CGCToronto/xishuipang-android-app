@@ -7,8 +7,9 @@ import 'package:xishuipang_android/UI/MainMenu/listItem.dart';
 
 class VolumeListMenu extends StatefulWidget {
   final List<int> volumeList1;
+  static String volumeNumber = "溪水旁";
 
-  VolumeListMenu({Key key, this.volumeList1}) : super(key: key);
+  VolumeListMenu({Key key, this.volumeList1, volumeNumber}) : super(key: key);
 
   @override
   _VolumeListMenu createState() => _VolumeListMenu();
@@ -19,9 +20,11 @@ class _VolumeListMenu extends State<VolumeListMenu> {
   Widget build(BuildContext context) {
     return CupertinoButton(
         child: Text(
-          volumeNumber != "溪水旁" ? "第${volumeNumber}期" : "溪水旁",
+          VolumeListMenu.volumeNumber != "溪水旁" ? "第${VolumeListMenu
+              .volumeNumber}期" : "溪水旁",
           style: TextStyle(
             color: Colors.white,
+
             //fontStyle: ,
           ),
         ),
@@ -35,16 +38,28 @@ class _VolumeListMenu extends State<VolumeListMenu> {
                       itemExtent: 40.0,
                       onSelectedItemChanged: (int index) {
                         setState(() {
-                          volumeNumber = widget.volumeList1[index].toString();
+                          VolumeListMenu.volumeNumber =
+                              this.widget.volumeList1[index].toString();
                         });
+
+                        return VolumeListMenu.volumeNumber;
                       },
+
                       children: new List<Widget>.generate(
                           widget.volumeList1.length, (int index) {
                         return new Center(
-                          child: new Text(
-                              '第' + widget.volumeList1[index].toString() + '期'),
+                          child: Text(
+                            '第' + widget.volumeList1[index].toString() + '期',
+                            style: TextStyle(
+                              color: Colors.black,
+                              fontSize: 20.0,
+                              //fontStyle: ,
+                            ),
+                          ),
                         );
-                      })),
+                      }),
+                    looping: true,
+                  ),
                 );
               });
         });

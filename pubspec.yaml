@@ -13,6 +13,8 @@ environment:
   sdk: ">=2.0.0-dev.68.0 <3.0.0"
 
 dependencies:
+
+  pull_to_refresh: ^1.1.6
   color: ^2.1.1
   share: ^0.5.3
   http: 0.12.0
@@ -27,11 +29,19 @@ dependencies:
   # Use with the CupertinoIcons class for iOS style icons.
   cupertino_icons: ^0.1.2
 
+
 dev_dependencies:
   flutter_test:
     sdk: flutter
 
+  flutter_launcher_icons: "^0.7.0"
 
+
+
+flutter_icons:
+  android: true
+  ios: true
+  image_path: "assets/images/icon/icon.jpg"
 
 
 

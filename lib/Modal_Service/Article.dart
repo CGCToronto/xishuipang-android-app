@@ -45,15 +45,16 @@ class Article{
       }
       if (i == 0 && !exp1.hasMatch(temp_article_content[0]) &&
           !exp2.hasMatch(temp_article_content[0])) {
-        String sentence = temp_article_content[1].length <= 77
-            ? temp_article_content[1]
-            : temp_article_content[1].substring(0, 76);
+        String sentence = temp_article_content[0].length <= 77
+            ? temp_article_content[0]
+            : temp_article_content[0].substring(0, 76);
         sentenceList1.add(sentence);
       }
       if (temp_article_content[i] == "") {
         temp_article_content[i] = "\n";
       }
     }
+
     return new Article(
         volume_number: parsedJson['volume'],
         article_id: parsedJson['id'],
