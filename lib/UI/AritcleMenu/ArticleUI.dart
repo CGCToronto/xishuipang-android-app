@@ -167,7 +167,7 @@ class _ArticleUI extends State<ArticleUI> {
   }
 
   Widget _buildTile(BuildContext context,String paragraph) {
-    RegExp exp = new RegExp("[http://www.xishuipang.com/content/].*");
+    RegExp exp = new RegExp("(http://www.xishuipang.com/content/).*");
     if (exp.hasMatch(paragraph)) {
 
       return Container(
@@ -181,7 +181,7 @@ class _ArticleUI extends State<ArticleUI> {
             //fontFamily: 'pfsc',
             fontSize: 16.0,
             fontWeight: FontWeight.w600,
-              letterSpacing:3.0,
+            //letterSpacing:3.0,
             wordSpacing: 6.0,
 
               height:1.5,
