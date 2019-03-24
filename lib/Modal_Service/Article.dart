@@ -34,6 +34,7 @@ class Article{
     RegExp exp1 = new RegExp("(<).*(.jpeg>)");
     RegExp exp2 = new RegExp("(<).*(.jpg>)");
     for(var i=0;i<temp_article_content.length;i++){
+
       if (exp1.hasMatch(temp_article_content[i]) ||
           exp2.hasMatch(temp_article_content[i])) {
         String reshapeString = temp_article_content[i].substring(
@@ -41,6 +42,9 @@ class Article{
         temp_article_content[i] =
             "http://www.xishuipang.com/content/volume_" + volume_number +
                 "/images/" + reshapeString;
+        if (i == 0) {
+          sentenceList1.add(" ");
+        }
         pictureList1.add(temp_article_content[i]);
       }
       if (i == 0 && !exp1.hasMatch(temp_article_content[0]) &&

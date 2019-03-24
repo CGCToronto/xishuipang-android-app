@@ -57,6 +57,7 @@ flutter:
   uses-material-design: true
   assets:
       - assets/images/banner.jpg
+      - assets/images/cgc.jpg
   #  fonts:
   #  - family: pfsc
   #    fonts:

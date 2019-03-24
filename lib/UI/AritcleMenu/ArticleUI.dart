@@ -20,7 +20,7 @@ class ArticleUI extends StatefulWidget{
 
 class _ArticleUI extends State<ArticleUI> {
 //Demo fetch article's values
-  String image = "assets/images/banner.jpg";
+  String image = "assets/images/cgc.jpg";
   Article as = new Article();
   bool fetchSuccess = false;
 
