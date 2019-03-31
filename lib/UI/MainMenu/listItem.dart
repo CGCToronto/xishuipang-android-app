@@ -9,34 +9,34 @@ import 'package:xishuipang_android/UI/AritcleMenu/ArticleUI.dart';
 //每个cardtile 信息模板
 class ListItem extends StatelessWidget {
   // save list inner information to single cardTile
-  static Future<List<cardTile>> ct1(String volumeNumber) async {
-    Menu m2 = await new Menu().fetchMenu(volumeNumber, 'simplified');
-    List<cardTile> ct2 = [];
-    for (int i = 0; i < m2.table_of_content.length; i++) {
-      for (int j = 0; j < m2.table_of_content[i].articles_list.length; j++) {
-        Article a = await (new Article().fetchArticle(m2.volume_number,
-            m2.table_of_content[i].articles_list[j].id, m2.character));
-
-        ct2.add(new cardTile.origin(
-          a.volume_number,
-          m2.table_of_content[i].articles_list[j].id,
-          //id
-          m2.character,
-          // character
-          m2.table_of_content[i].articles_list[j].author,
-          //author
-          m2.table_of_content[i].category_name,
-          //category_name
-          m2.table_of_content[i].articles_list[j].title,
-          //title
-          a.pictureList,
-          //picture could be used
-          a.sentenceList, //sentnce could be used
-        ));
-      }
-    }
-    return ct2;
-  }
+//  static Future<List<cardTile>> ct1(String volumeNumber) async {
+//    Menu m2 = await new Menu().fetchMenu(volumeNumber, 'simplified');
+//    List<cardTile> ct2 = [];
+//    for (int i = 0; i < m2.table_of_content.length; i++) {
+//      for (int j = 0; j < m2.table_of_content[i].articles_list.length; j++) {
+//        Article a = await (new Article().fetchArticle(m2.volume_number,
+//            m2.table_of_content[i].articles_list[j].id, m2.character));
+//
+//        ct2.add(new cardTile.origin(
+//          a.volume_number,
+//          m2.table_of_content[i].articles_list[j].id,
+//          //id
+//          m2.character,
+//          // character
+//          m2.table_of_content[i].articles_list[j].author,
+//          //author
+//          m2.table_of_content[i].category_name,
+//          //category_name
+//          m2.table_of_content[i].articles_list[j].title,
+//          //title
+//          a.pictureList,
+//          //picture could be used
+//          a.sentenceList, //sentnce could be used
+//        ));
+//      }
+//    }
+//    return ct2;
+//  }
 
   cardTile item;
 

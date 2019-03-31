@@ -12,6 +12,7 @@ import 'package:xishuipang_android/UI/MainMenu/IssueMenu.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:xishuipang_android/UI/MainMenu/VolumeListMenu.dart';
 import "package:pull_to_refresh/pull_to_refresh.dart";
+import 'package:async_loader/async_loader.dart';
 
 
 class MainPart extends StatefulWidget {
@@ -23,13 +24,16 @@ class MainPart extends StatefulWidget {
 }
 
 class _MainPart extends State<MainPart> {
+  final GlobalKey<RefreshIndicatorState> _refreshIndicatorKey= new GlobalKey<RefreshIndicatorState>();
   List<int> volumeList;
   String volumeNumber = "溪水旁";
+  List<cardTile> ct2 = [];
 
   @override
   void initState() {
     super.initState();
     _loadData();
+
   }
 
   //load all infor that you need at initial
@@ -40,14 +44,42 @@ class _MainPart extends State<MainPart> {
       this.volumeNumber = latestNumber.toString();
       this.volumeList = IssueVolume1;
     });
+    WidgetsBinding.instance
+        .addPostFrameCallback((_) => _refreshIndicatorKey.currentState.show());
   }
 
-  currentPage(String volumeNumber) {
-    return IssueMenu(ct11: ListItem.ct1(volumeNumber));
+
+  Future<Null> _refresh() async {
+    Menu m2 = await new Menu().fetchMenu(this.volumeNumber, 'simplified');
+    List<cardTile> ct3 = [];
+      for (int i = 0; i < m2.table_of_content.length; i++) {
+        for (int j = 0; j < m2.table_of_content[i].articles_list.length; j++) {
+          Article a = await (new Article().fetchArticle(m2.volume_number,
+              m2.table_of_content[i].articles_list[j].id, m2.character));
+
+          ct3.add(new cardTile.origin(
+            a.volume_number,
+            m2.table_of_content[i].articles_list[j].id,
+            //id
+            m2.character,
+            // character
+            m2.table_of_content[i].articles_list[j].author,
+            //author
+            m2.table_of_content[i].category_name,
+            //category_name
+            m2.table_of_content[i].articles_list[j].title,
+            //title
+            a.pictureList,
+            //picture could be used
+            a.sentenceList, //sentnce could be used
+          ));
+        }
+      }
+      //print(ct2.length);
+    setState(() {
+      this.ct2=ct3;
+    });
   }
-
-
-
 
 
   //receive data and render scaffold
@@ -59,28 +91,35 @@ class _MainPart extends State<MainPart> {
           volumeList1: volumeList, volumeNumber: volumeNumber,),
         actions: <Widget>[
 
-          CupertinoButton(
-
-            onPressed: () {
-              setState(() {
-                this.volumeNumber = VolumeListMenu.volumeNumber;
-                print(this.volumeNumber);
-              });
-            },
-            child: Text("跳转", style: TextStyle(
-              color: Colors.white,
-              //fontStyle: ,
-            ),),
-          ),
+          new IconButton(
+              icon: const Icon(Icons.refresh),
+              tooltip: '跳转',
+              onPressed: () {
+                setState(() {
+                  this.volumeNumber=VolumeListMenu.volumeNumber;
+                });
+                _refreshIndicatorKey.currentState.show();
+              })
         ],
       ),
 
 
-      body: this.currentPage(this.volumeNumber),
+      //body: this.currentPage(this.volumeNumber),
+      body:RefreshIndicator(
+          key: _refreshIndicatorKey,
+          onRefresh: _refresh,
+          child:new ListView.builder(
+            physics: BouncingScrollPhysics(),
+            itemCount:ct2.length,
+            itemBuilder: (context, index) {
+              return new ListItem(ct2[index]);
+      },
+    ),
 
+    ),
     );
-  }
 
+}
 
 }
 

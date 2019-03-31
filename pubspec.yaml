@@ -35,6 +35,7 @@ dev_dependencies:
     sdk: flutter
 
   flutter_launcher_icons: "^0.7.0"
+  async_loader: ^0.1.1
 
 
 
