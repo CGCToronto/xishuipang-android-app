@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:xishuipang_android/UI/AritcleMenu/ArticleUI.dart';
 import 'package:xishuipang_android/UI/MainMenu/MainUI.dart';
 import 'package:xishuipang_android/UI/LoadingMenu/Loadingpage.dart';
-import 'package:xishuipang_android/UI/testRefresh.dart';
+//import 'package:xishuipang_android/UI/testRefresh.dart';
 
 //应用程序入口
 void main() => runApp(MaterialApp(

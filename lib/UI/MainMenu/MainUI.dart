@@ -1,4 +1,4 @@
-import 'package:xishuipang_android/UI/Main.dart';
+import 'package:xishuipang_android/main.dart';
 import 'package:flutter/material.dart';
 import 'package:xishuipang_android/Modal_Service/Menu.dart';
 import 'package:xishuipang_android/UI/AritcleMenu/ArticleUI.dart';
