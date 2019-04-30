@@ -21,6 +21,7 @@ class Menu{
 
     var list=parsedJson['table_of_content'] as List;
     List<Category>temp=list.map((i)=>Category.fromJson(i)).toList();
+    print(temp);
      return Menu(
        title: parsedJson['title'],
        theme:parsedJson['theme'],

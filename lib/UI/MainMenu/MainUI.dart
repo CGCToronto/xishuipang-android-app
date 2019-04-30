@@ -8,7 +8,6 @@ import 'package:http/http.dart' as http;
 import 'package:xishuipang_android/UI/MainMenu/listItem.dart';
 import 'package:xishuipang_android/UI/MainMenu/cardTile.dart';
 import 'package:xishuipang_android/Modal_Service/Article.dart';
-import 'package:xishuipang_android/UI/MainMenu/IssueMenu.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:xishuipang_android/UI/MainMenu/VolumeListMenu.dart';
 import "package:pull_to_refresh/pull_to_refresh.dart";
@@ -27,6 +26,8 @@ class _MainPart extends State<MainPart> {
   final GlobalKey<RefreshIndicatorState> _refreshIndicatorKey= new GlobalKey<RefreshIndicatorState>();
   List<int> volumeList;
   String volumeNumber = "溪水旁";
+  bool isSimplified = true;
+  String character = "simplified";
   List<cardTile> ct2 = [];
 
   @override
@@ -50,18 +51,19 @@ class _MainPart extends State<MainPart> {
 
 
   Future<Null> _refresh() async {
-    Menu m2 = await new Menu().fetchMenu(this.volumeNumber, 'simplified');
+    Menu m2 = await new Menu().fetchMenu(this.volumeNumber, this.character);
+
     List<cardTile> ct3 = [];
       for (int i = 0; i < m2.table_of_content.length; i++) {
         for (int j = 0; j < m2.table_of_content[i].articles_list.length; j++) {
           Article a = await (new Article().fetchArticle(m2.volume_number,
-              m2.table_of_content[i].articles_list[j].id, m2.character));
+              m2.table_of_content[i].articles_list[j].id, this.character));
 
           ct3.add(new cardTile.origin(
             a.volume_number,
             m2.table_of_content[i].articles_list[j].id,
             //id
-            m2.character,
+            this.character,
             // character
             m2.table_of_content[i].articles_list[j].author,
             //author
@@ -89,7 +91,37 @@ class _MainPart extends State<MainPart> {
       appBar: new AppBar(
         title: VolumeListMenu(
           volumeList1: volumeList, volumeNumber: volumeNumber,),
+
         actions: <Widget>[
+
+          Container(
+            child: Row(
+              children: <Widget>[
+                Text("繁"),
+                Switch(
+                  value: this.isSimplified,
+                  onChanged: (value) {
+                    setState(() {
+                      this.isSimplified = value;
+                      if (value == true) {
+                        this.character = "simplified";
+                      }
+                      else {
+                        this.character = "traditional";
+                      }
+                      _refresh();
+                    });
+                    _refreshIndicatorKey.currentState.show();
+                  },
+                  activeTrackColor: Colors.white,
+                  activeColor: Colors.white,
+                  inactiveTrackColor: Colors.white,
+                ),
+                Text("简")
+              ],
+            ),
+          ),
+
 
           new IconButton(
               icon: const Icon(Icons.refresh),
@@ -109,7 +141,7 @@ class _MainPart extends State<MainPart> {
           key: _refreshIndicatorKey,
           onRefresh: _refresh,
           child:new ListView.builder(
-            physics: BouncingScrollPhysics(),
+            //physics: BouncingScrollPhysics(),
             itemCount:ct2.length,
             itemBuilder: (context, index) {
               return new ListItem(ct2[index]);

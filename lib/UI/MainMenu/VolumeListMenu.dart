@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:xishuipang_android/UI/MainMenu/MainUI.dart';
 import 'package:xishuipang_android/Modal_Service/Menu.dart';
-import 'package:xishuipang_android/UI/MainMenu/IssueMenu.dart';
 import 'package:xishuipang_android/UI/MainMenu/listItem.dart';
 
 class VolumeListMenu extends StatefulWidget {
@@ -21,7 +20,7 @@ class _VolumeListMenu extends State<VolumeListMenu> {
     return CupertinoButton(
         child: Text(
           VolumeListMenu.volumeNumber != "溪水旁" ? "第${VolumeListMenu
-              .volumeNumber}期" : "溪水旁",
+              .volumeNumber}期" : "溪水旁\u25FF",
           style: TextStyle(
             color: Colors.white,
 
