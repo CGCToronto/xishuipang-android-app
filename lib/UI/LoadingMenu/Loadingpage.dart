@@ -17,7 +17,7 @@ class _LoadingState extends State<LoadingPage> {
   void initState() {
     super.initState();
     //在加载页面停顿3秒
-    new Future.delayed(Duration(seconds: 3), () async {
+    new Future.delayed(Duration(seconds: 2), () async {
       print("启动溪水旁app....");
       Navigator.of(context).pushReplacementNamed("MainMenu");
     });

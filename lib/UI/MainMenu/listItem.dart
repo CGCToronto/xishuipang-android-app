@@ -179,7 +179,7 @@ class ListItem extends StatelessWidget {
         print("taptap");
         var route = new MaterialPageRoute(
             builder: (BuildContext context) => new ArticleUI(
-                valueOfID: item.article_id, volumenumber: item.volume_number));
+                valueOfID: item.article_id, volumenumber: item.volume_number,character: item.character,));
         Navigator.of(context).push(route);
       },
       child:

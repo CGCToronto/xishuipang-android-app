@@ -6,12 +6,17 @@ import 'package:share/share.dart';
 import 'package:flutter/foundation.dart';
 import 'package:xishuipang_android/button/shareButton.dart';
 import 'package:xishuipang_android/UI/MainMenu/listItem.dart';
+import 'package:flutter/material.dart';
+import 'dart:async';
+import 'package:async_loader/async_loader.dart';
+
 
 class ArticleUI extends StatefulWidget{
   final String valueOfID;
   final String volumenumber;
+  final String character;
 
-  ArticleUI({Key key, this.valueOfID, this.volumenumber}) : super(key: key);
+  ArticleUI({Key key, this.valueOfID, this.volumenumber,this.character}) : super(key: key);
   @override
   State<StatefulWidget> createState() {
     return _ArticleUI();
@@ -23,39 +28,66 @@ class _ArticleUI extends State<ArticleUI> {
   String image = "assets/images/cgc.jpg";
   Article as = new Article();
   bool fetchSuccess = false;
+  final GlobalKey<RefreshIndicatorState> _refreshIndicatorKey1= new GlobalKey<RefreshIndicatorState>();
+  final GlobalKey<AsyncLoaderState> asyncLoaderState =
+  new GlobalKey<AsyncLoaderState>();
 
 
+  Future<Null> _handleRefresh() async {
+    asyncLoaderState.currentState.reloadState();
+    return null;
+  }
+
+
+  Future<Null> _loadData() async {
+    //fetch data and transfer to plain object
+    Article as1=await new Article().fetchArticle(widget.volumenumber, widget.valueOfID, widget.character);
+
+    setState(() {
+      this.as=as1;
+    });
+   // _refreshIndicatorKey1.currentState.show();
+
+
+  }
 
 
 
   @override
   Widget build(BuildContext context) {
-    //fetch data and transfer to plain object
-    as.fetchArticle(
-        widget.volumenumber.toString(), widget.valueOfID, "simplified").then((
-        resultArticle) {
-      setState(() {
-        as = resultArticle;
-        fetchSuccess = true;
-     });
-    });
 
     //appbar setting
     List<Widget> app_bar_button = [
       shareButton(as),
     ];
+    var _asyncLoader = new AsyncLoader(
+      key: asyncLoaderState,
+      initState: () async => await _loadData(),
+      renderLoad: () => Center(child: new CircularProgressIndicator()),
+      renderSuccess: ({data}) => _buildScrollable(context, as, app_bar_button),
+    );
 
-    return
-      fetchSuccess == false
-          ? Center(
-        child: CircularProgressIndicator(
-          valueColor: new AlwaysStoppedAnimation<Color>(Colors.black),),
-      )
-        :
-      new Scaffold(
-            body: _buildScrollable(context,as, app_bar_button),
-          );
+
+
+      return
+        new Scaffold(
+
+          body:
+          RefreshIndicator(
+              onRefresh:_handleRefresh,
+             child:_asyncLoader,
+
+
+
+        ),);
+
+
+
+
   }
+
+
+
 
   Widget _buildScrollable(BuildContext context,Article as, List<Widget> app_bar_button) {
     return CustomScrollView(
@@ -164,6 +196,7 @@ class _ArticleUI extends State<ArticleUI> {
 
       ],
     );
+
   }
 
   Widget _buildTile(BuildContext context,String paragraph) {
