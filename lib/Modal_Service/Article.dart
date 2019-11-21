@@ -33,10 +33,11 @@ class Article{
     //use regex to find string in list with jpeg file and change it into https format, and add "\n" into list
     RegExp exp1 = new RegExp("(<).*(.jpeg>)");
     RegExp exp2 = new RegExp("(<).*(.jpg>)");
+    RegExp exp3 = new RegExp("(<).*(.png>)");
     for(var i=0;i<temp_article_content.length;i++){
 
       if (exp1.hasMatch(temp_article_content[i]) ||
-          exp2.hasMatch(temp_article_content[i])) {
+          exp2.hasMatch(temp_article_content[i]) || exp3.hasMatch(temp_article_content[i])) {
         String reshapeString = temp_article_content[i].substring(
             1, temp_article_content[i].length - 1);
         temp_article_content[i] =
@@ -48,7 +49,8 @@ class Article{
         pictureList1.add(temp_article_content[i]);
       }
       if (i == 0 && !exp1.hasMatch(temp_article_content[0]) &&
-          !exp2.hasMatch(temp_article_content[0])) {
+          !exp2.hasMatch(temp_article_content[0]) &&
+          !exp3.hasMatch(temp_article_content[0])) {
         String sentence = temp_article_content[0].length <= 77
             ? temp_article_content[0]
             : temp_article_content[0].substring(0, 76);

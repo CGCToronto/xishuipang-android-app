@@ -23,12 +23,21 @@ class IssueVolumeList{
     final response =
     await http.get('http://www.xishuipang.com/volume/list');
 
+
+    // If the call to the server was successful
     if (response.statusCode == 200) {
-      // If the call to the server was successful, parse the JSON
+
+
+//      //If localFile is remained the same
+//      if(IssueVolumeList().fromJson(json.decode(response.body))[0]==)
+//
+//      //If localFile is changed
 
       return IssueVolumeList().fromJson(json.decode(response.body));
     } else {
-      // If that call was not successful, throw an error.
+      // read localFile and parse it
+
+      // If that call was not successful and no local file stored, throw an error.
       throw Exception('Failed to load Volume List');
     }
   }
