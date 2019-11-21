@@ -3,8 +3,18 @@ import 'dart:convert';
 import 'package:http/http.dart' as http;
 import 'package:flutter/foundation.dart';
 import 'package:xishuipang_android/Support/QuickSort.dart';
+import 'package:path_provider/path_provider.dart';
+import 'dart:io';
 
 class IssueVolumeList{
+  //find current path
+  Future<String> get _localPath async {
+    final directory = await getApplicationDocumentsDirectory();
+    print(directory.path);
+
+
+    return directory.path;
+  }
 
   //return a list of ascending number from volume-list json file
   List<int> fromJson(List<dynamic> json) {
@@ -20,25 +30,43 @@ class IssueVolumeList{
 
 
   Future<List<int>> fetchVolumeList() async {
-    final response =
-    await http.get('http://www.xishuipang.com/volume/list');
+    final path = await _localPath;
+    File file;
 
-
-    // If the call to the server was successful
-    if (response.statusCode == 200) {
-
-
-//      //If localFile is remained the same
-//      if(IssueVolumeList().fromJson(json.decode(response.body))[0]==)
-//
-//      //If localFile is changed
-
-      return IssueVolumeList().fromJson(json.decode(response.body));
-    } else {
-      // read localFile and parse it
-
-      // If that call was not successful and no local file stored, throw an error.
-      throw Exception('Failed to load Volume List');
+    //check if directory exists, if not create one
+    if(!await Directory('$path/LocalStorage').exists()){
+      new Directory('$path/LocalStorage').create()
+      // The created directory is returned as a Future.
+          .then((Directory directory) {
+        print(directory.path);
+      });
     }
+
+    try {
+      final response =
+      await http.get('http://www.xishuipang.com/volume/list');
+      // If the call to the server was successful
+      if (response.statusCode == 200) {
+
+        final dir = Directory('$path/LocalStorage/list.json');
+        dir.deleteSync(recursive: true);
+        print(dir);
+
+        file=File('$path/LocalStorage/list.json');
+        file.writeAsString(response.body);
+        print(file);
+
+
+        return IssueVolumeList().fromJson(json.decode(await file.readAsString()));
+      }
+    }catch(e){
+      file = File('$path/LocalStorage/list.json');
+      print(file);
+      return IssueVolumeList().fromJson(
+          json.decode(await file.readAsString()));
+    }
+
+
+
   }
 }
