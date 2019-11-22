@@ -10,9 +10,6 @@ class IssueVolumeList{
   //find current path
   Future<String> get _localPath async {
     final directory = await getApplicationDocumentsDirectory();
-    print(directory.path);
-
-
     return directory.path;
   }
 
@@ -29,41 +26,51 @@ class IssueVolumeList{
   }
 
 
+
   Future<List<int>> fetchVolumeList() async {
     final path = await _localPath;
     File file;
 
-    //check if directory exists, if not create one
-    if(!await Directory('$path/LocalStorage').exists()){
-      new Directory('$path/LocalStorage').create()
-      // The created directory is returned as a Future.
-          .then((Directory directory) {
-        print(directory.path);
-      });
-    }
+
 
     try {
+      //check if directory exists, if not create one
+      if(!await Directory('$path/LocalStorage').exists()){
+        new Directory('$path/LocalStorage').create()
+        // The created directory is returned as a Future.
+            .then((Directory directory) {
+          print("create volumelist");
+        });
+      }
+
       final response =
       await http.get('http://www.xishuipang.com/volume/list');
+
       // If the call to the server was successful
       if (response.statusCode == 200) {
 
-        final dir = Directory('$path/LocalStorage/list.json');
-        dir.deleteSync(recursive: true);
-        print(dir);
+
+        if(await Directory('$path/LocalStorage/list.json').exists()){
+          final dir = Directory('$path/LocalStorage/list.json');
+          dir.deleteSync(recursive: true);
+          print("$dir delete list.json");
+        }
 
         file=File('$path/LocalStorage/list.json');
         file.writeAsString(response.body);
-        print(file);
+//        print(json.decode(await file.readAsString()));
+        print("$file create list.json");
 
 
         return IssueVolumeList().fromJson(json.decode(await file.readAsString()));
       }
     }catch(e){
       file = File('$path/LocalStorage/list.json');
-      print(file);
+      print("read local list.json");
+      print(json.decode(await file.readAsString()));
       return IssueVolumeList().fromJson(
           json.decode(await file.readAsString()));
+
     }
 
 

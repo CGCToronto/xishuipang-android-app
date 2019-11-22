@@ -2,6 +2,8 @@ import 'dart:async';
 import 'dart:convert';
 import 'package:http/http.dart' as http;
 import 'package:flutter/foundation.dart';
+import 'package:path_provider/path_provider.dart';
+import 'dart:io';
 
 
 class Menu{
@@ -31,18 +33,73 @@ class Menu{
      );
   }
 
-  Future<Menu> fetchMenu(String volume_number,String character  ) async {
-     final response =
-     await http.get('http://www.xishuipang.com/article/list?volume='+volume_number+'&character='+character);
 
-     if (response.statusCode == 200) {
-       // If the call to the server was successful, parse the JSON
+   //find current path
+   Future<String> get _localPath async {
+     final directory = await getApplicationDocumentsDirectory();
+     return directory.path;
+   }
 
-       return Menu.fromJson(json.decode(response.body));
-     } else {
-       // If that call was not successful, throw an error.
-       throw Exception('Failed to load Menu');
-     }
+  Future<Menu> fetchMenu(String volume_number,String character) async {
+
+    final path = await _localPath;
+    File file;
+
+    try {
+
+      //check if directory exists, if not create one
+      if(!await Directory('$path/LocalStorage/$volume_number/$character').exists()){
+        new Directory('$path/LocalStorage/$volume_number/$character').create(recursive: true)
+        // The created directory is returned as a Future.
+            .then((Directory directory) {
+          print("create /$volume_number/$character ");
+        });
+      }
+      else{
+        print("/$volume_number/$character exsits");
+      }
+
+
+      final response =
+      await http.get('http://www.xishuipang.com/article/list?volume='+volume_number+'&character='+character);
+
+      // If the call to the server was successful
+      if (response.statusCode == 200) {
+
+        if(Directory('$path/LocalStorage/$volume_number/$character/$volume_number$character.json').existsSync()){
+          final dir = Directory('$path/LocalStorage/$volume_number/$character/$volume_number$character.json');
+          dir.deleteSync(recursive: true);
+          print("$dir delete $volume_number$character.json ");
+        }
+
+        file=File('$path/LocalStorage/$volume_number/$character/$volume_number$character.json');
+        file.writeAsString(response.body);
+//        print(json.decode(await file.readAsString()));
+        print("$file create $volume_number$character.json");
+
+
+
+        return Menu.fromJson(json.decode(await file.readAsString()));
+      }
+
+    }catch(e){
+      file = File('$path/LocalStorage/$volume_number/$character/$volume_number$character.json');
+      print("read local $volume_number$character.json");
+      return Menu.fromJson(
+          json.decode(await file.readAsString()));
+    }
+
+//     final response =
+//     await http.get('http://www.xishuipang.com/article/list?volume='+volume_number+'&character='+character);
+//
+//     if (response.statusCode == 200) {
+//       // If the call to the server was successful, parse the JSON
+//
+//       return Menu.fromJson(json.decode(response.body));
+//     } else {
+//       // If that call was not successful, throw an error.
+//       throw Exception('Failed to load Menu');
+//     }
    }
 }
 
